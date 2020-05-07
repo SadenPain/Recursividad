@@ -12,7 +12,7 @@
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author: Sascha Paez
+ *         Author: SadenPain
  *   Organization: Universidad de Cadiz
  *
  * =====================================================================================
