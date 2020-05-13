@@ -31,19 +31,14 @@
  *  Description:  
  * =====================================================================================
  */
-int r_func ( int *vector, int N, int i, int creciente, int decreciente )
+int r_func ( int *vector, int N, int i, int cambios )
 {
   if ( i == N )
-    return creciente + decreciente;
+    return cambios; 
+  if ( vector[i] != vector[i+1] )
+    return r_func ( vector, N, i+1, cambios + 1 );
   else
-  {
-    if ( vector[i] > vector[i+1] )
-      return r_func ( vector, N, i+1, creciente, decreciente+1 );
-    else if ( vector[i] < vector[i+1] )
-      return r_func ( vector, N, i+1, creciente+1, decreciente );
-    else
-      return r_func ( vector, N, i+1, creciente, decreciente );
-  }
+    return r_func ( vector, N, i+1, cambios );
 }		/* -----  end of function r_func  ----- */
 
 /* 
@@ -57,7 +52,7 @@ int func_call ( int *vector, int N )
   if (N <= 1)
     return -1;
   else
-    return r_func ( vector, N, 0, 0, 0 );
+    return r_func ( vector, N, 0, 0 );
 }		/* -----  end of function func_call  ----- */
 
 int main () 
@@ -67,7 +62,7 @@ int main ()
   printf("Numero de elementos: ");
   scanf("%d", &N);
 
-  vector = (int *)malloc(N *sizeof(int));
+  vector = (int *)malloc(N * sizeof(int));
 
   for ( int i = 0; i < N; i++ )
   {

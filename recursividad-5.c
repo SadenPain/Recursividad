@@ -23,7 +23,6 @@
 #include <string.h>
 #include <errno.h>
 
-
 /* 
  * ===  FUNCTION  ======================================================================
  *         Name:  r_func (int *v, int size_v, int counter, int max_counter)

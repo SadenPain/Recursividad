@@ -69,6 +69,8 @@ int main ( int argc, char *argv[] ) {
   printf ( "Size of vector: ");
   scanf( "%d", &A_size );
   
+  A = (int *)malloc(A_size * sizeof(int));
+
   for ( int i = 0; i < A_size; i++ ) {
     printf( "Number(%d): ", i );
     scanf( "%d", &A[i] );
