@@ -25,40 +25,36 @@
 
 /* 
  * ===  FUNCTION  ======================================================================
- *         Name:  r_func
- *  Description:  Si la suma de una pareja es igual a la pareja consecutiva
- *  devuelve 1, si no devuelve 0.
+ *         Precondicion: Recibe los parametros declarados en la funcion llamada
+ *         Postcondicion: Calcular si la suma de dos pares consecutivos es igual,
+ *         en caso afirmativo devuelve 1, en caso contrario 0.
  * =====================================================================================
  */
-int r_func ( int *v, int A_size, int i, int k, int suma )
+int r_func ( int *v, int A_size, int i )
 {
-  if ( i == A_size )
+  //Como ya ha comprobado todas las parejas y ninguna devuelve 1, devolvemos 0
+  if ( (i-3) == A_size )
     return 0;
-  if ( k < 2 )
-  {
-    suma += v[i];
-    return r_func ( v, A_size, i+1, k+1, suma ); 
-  }
-  if ( k == 2 )
-    if (suma == v[i] + v[i+1])
-      return 1;
-    else
-      return r_func ( v, A_size, i, 0, 0 ); 
+  // Si se cumple el caso de que existan dos pares consecutivos que su suma sea la misma
+  if ( v[i] + v[i+1] == v[i+2] + v[i+3]) 
+    return 1; // Devuelve 1, caso afirmativo
+  else
+    return r_func ( v, A_size, i+1 ); // Si no, sigue comprobando
 }		/* -----  end of function r_func  ----- */
 
 /* 
  * ===  FUNCTION  ======================================================================
- *         Name:  func_call
- *  Description:  Llama a la funcion recursiva
+ *         Precondicion: Recibir el vector y su tamanio
+ *         Postcondicion: Llamar a la funcion recursiva 
  * =====================================================================================
  */
 int func_call ( int *v, int A_size ) 
 {
-  int suma = 0, i = 0, k = 0;
+  int i = 0;
   if ( A_size <= 2 )
     return -1;
   else 
-    return r_func ( v, A_size, i ,k ,suma); 
+    return r_func ( v, A_size, i ); // Entero i encargado de devolver el vector
 
 }		/* -----  end of function func_call  ----- */
 
@@ -77,7 +73,10 @@ int main ( int argc, char *argv[] ) {
   }
   
   partner = func_call ( A, A_size );
-  printf( "%d\n", partner );
+  if ( partner == -1)
+    printf ("Vector demasiado pequenio(minimo 3)\n");
+  else
+    printf( "Encontrada(s) %d pareja(s)\n", partner );
   return EXIT_SUCCESS;
 }				/* ----------  end of function main  ---------- */
 

@@ -23,19 +23,24 @@ int r_func ( int *vector, int size, int i, int j, int suma )
     if ( i == size )
         return suma;
     if ( j == i )
-        return r_func ( vector, size, i+1, i, suma );
+        return r_func ( vector, size, i+1, i, suma+vec );
     else
         return r_func ( vector, size, i, j+1, vector[i] + vector[j] );
 }
 
+/*
+ *      Precondicion: Recibe el vector y su tamanio
+ *      Postcondicion: Llama a la funcion recursiva
+ *
+ */
 int func_call ( int *vector, int size )
 {
     if (size <= 1)
         return -1;
     else
-        return r_func ( vector, size, 0, 0, 0 );
-}
-
+        return r_func ( vector, size, 0, 0, 0 ); // j y k seran los valores del par de vectores
+}                                                // i sera el encargado de recorrer el vector  
+                                                 // suma guardara el valor de las sumas de los vectores   
 int main ()
 {
     int *vector, size, suma;
